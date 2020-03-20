@@ -43,16 +43,13 @@ import java.util.TimerTask;
 
 public class PassengerActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener {
 
+    //Variables
     private GoogleMap mMap;
-
     private LocationManager locationManager;
     private LocationListener locationListener;
-
     private Button btnRequestCar;
     private Button btnBeep;
-
     private boolean isUberCancelled = true;
-
     private boolean isCarReady = false;
     private Timer t;
 
@@ -65,9 +62,9 @@ public class PassengerActivity extends FragmentActivity implements OnMapReadyCal
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        //Initialization
         btnRequestCar = findViewById(R.id.btnRequestCar);
         btnRequestCar.setOnClickListener(this);
-
         btnBeep = findViewById(R.id.btnBeepBeep);
 
         btnBeep.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +76,7 @@ public class PassengerActivity extends FragmentActivity implements OnMapReadyCal
         });
 
 
+        //Checking is user cancel requesting car before cloasing app
         ParseQuery<ParseObject> carRequestQuery = ParseQuery.getQuery("RequestCar");
         carRequestQuery.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
         carRequestQuery.findInBackground(new FindCallback<ParseObject>() {
@@ -135,7 +133,6 @@ public class PassengerActivity extends FragmentActivity implements OnMapReadyCal
             public void onLocationChanged(Location location) {
 
                 updateCameraPassengerLocation(location);
-
 
             }
 
@@ -198,18 +195,23 @@ public class PassengerActivity extends FragmentActivity implements OnMapReadyCal
 
     }
 
+    //Getting user location
     private void updateCameraPassengerLocation(Location pLocation) {
 
-
-        if (isCarReady == false) {
-            LatLng passengerLocation = new LatLng(pLocation.getLatitude(), pLocation.getLongitude());
-            mMap.clear();
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(passengerLocation, 15));
-
-            mMap.addMarker(new MarkerOptions().position(passengerLocation).title("You are here!!!").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
+        try {
+            if (isCarReady == false) {
+                LatLng passengerLocation = new LatLng(pLocation.getLatitude(), pLocation.getLongitude());
+                mMap.clear();
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(passengerLocation, 15));
+                mMap.addMarker(new MarkerOptions().position(passengerLocation).title("You are here!!!").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
+            }
+        } catch (Exception e){
+            e.printStackTrace();
         }
+
     }
 
+    //Listener when request car button is clicked
     @Override
     public void onClick(View view) {
 
