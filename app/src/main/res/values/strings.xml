@@ -4,7 +4,8 @@
     <string name="back4app_server_url">https://parseapi.back4app.com/</string>
 
     <!-- Change the following strings as required -->
-    <string name="back4app_app_id">rOQz6gpA4vlXJLuNk6EPpwrPZdB6AvwnymzxrhFY</string>
-    <string name="back4app_client_key">lx4JWDRBgCEQ6zep1G40f9sI1A9nCBqLEmWCUaCt</string>
+    <string name="back4app_app_id">J1CSrlk1STN1Q2plej2Kl0rI54a5MtuoYNaV5ByD</string>
+    <string name="back4app_client_key">m69ffQSR7SMSsogdCuWBaAcIy07eIHIC6IMK0FSs</string>
     <string name="title_activity_pessenger">Map</string>
+    <string name="title_activity_view_locations_maps">Map</string>
 </resources>
